@@ -1,0 +1,10 @@
+<div
+  *ngIf="text"
+  class="alert"
+  [class.success]="type === 'success'"
+  [class.warning]="type === 'warning'"
+  [class.error]="type === 'error'"
+  (click)="close()"
+>
+  <p>{{ text }}</p>
+</div>
