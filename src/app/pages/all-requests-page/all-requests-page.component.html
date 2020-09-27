@@ -1,0 +1,38 @@
+<p>THIS PAGE WILL BE FOR DOC ONLY</p>
+
+<p>ALL REQUESTS</p>
+
+<form
+  [formGroup]="form"
+  (submit)="confirmRequest(request.requestId, request.desiredTimeForConsultation)"
+  class="container"
+  *ngFor="let request of allRequests"
+>
+  <div class="content">
+    <div class="dateCard">
+      <span class="day">{{ request.date | date: "d" }}</span>
+      <span class="month">{{ request.date | date: "MMMM" }}</span>
+    </div>
+    <p class="text">
+      <span class="highlighted">Customers name:</span>
+      {{ request.customersName }}
+    </p>
+    <p class="text">
+      <span class="highlighted">Phone:</span> {{ request.phone }}
+    </p>
+    <p class="text">
+      <span class="highlighted">Animal:</span> {{ request.animal }}
+    </p>
+    <p class="text">
+      <span class="highlighted">Comments:</span> {{ request.comments }}
+    </p>
+  </div>
+  <input
+    formControlName="docAnswer"
+    class="primaryInput"
+    type="text"
+    placeholder="short answer"
+  />
+
+  <button class="btn blueBtn" type="submit">Take order</button>
+</form>

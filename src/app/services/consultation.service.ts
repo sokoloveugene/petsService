@@ -3,6 +3,7 @@ import { consultationRequestInterface } from '../../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AlertService } from './alert.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,53 @@ export class ConsultationService {
         JSON.stringify(request)
       )
       .subscribe(next, error);
+  }
+
+  getAllUnconfirmedConsultationRequests() {
+    return this.http
+      .get(
+        `https://${environment.projectId}.firebaseio.com/consultationRequests.json`
+      )
+      .pipe(
+        map((res) => {
+          if (res) {
+            return Object.keys(res)
+              .map((key) => ({
+                ...res[key],
+                requestId: key,
+              }))
+              .filter((item) => item.confirmed === false);
+          }
+        })
+      );
+  }
+
+  getConsultationRequestsById(id: string) {
+    return this.http
+      .get(
+        `https://${environment.projectId}.firebaseio.com/consultationRequests.json`
+      )
+      .pipe(
+        map((res) => {
+          if (res) {
+            return Object.keys(res)
+              .map((key) => ({ ...res[key], requestId: key }))
+              .filter((item) => item.userID === id);
+          }
+        })
+      );
+  }
+
+  deleteRequestById(id: string) {
+    return this.http.delete(
+      `https://${environment.projectId}.firebaseio.com/consultationRequests/${id}.json`
+    );
+  }
+
+  confirmRequestById(id: string, update: any) {
+    return this.http.patch(
+      `https://${environment.projectId}.firebaseio.com/consultationRequests/${id}.json`,
+      update
+    );
   }
 }

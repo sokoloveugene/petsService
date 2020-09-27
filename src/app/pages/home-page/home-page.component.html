@@ -1,0 +1,123 @@
+<div class="workspace">
+  <div class="authContainer">
+    <button class="btn" *ngIf="!auth.isAuth()" [routerLink]="['/login']">
+      Login &#8250;
+    </button>
+
+    <button
+      class="btn blackBtn"
+      *ngIf="!auth.isAuth()"
+      [routerLink]="['/sign_up']"
+    >
+      Join now
+    </button>
+
+    <button
+      class="btn blackBtn logout"
+      *ngIf="auth.isAuth()"
+      (click)="auth.logout()"
+    >
+      Log Out
+    </button>
+  </div>
+
+  <button *ngIf="auth.isAuth()" [routerLink]="['/user_requests']">
+    Your requests
+  </button>
+
+  <button
+    *ngIf="auth.isAuth() && auth.isAdmin()"
+    [routerLink]="['/all_requests']"
+  >
+    ALL requests
+  </button>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h2 class="description">Book a doctor`s consultation.</h2>
+    <input
+      class="primaryInput"
+      formControlName="customersName"
+      type="text"
+      placeholder="name"
+    />
+
+    <p class="title">Pick any one:</p>
+    <div class="animalSelectContainer">
+      <input
+        class="selectInput"
+        formControlName="animal"
+        type="radio"
+        name="animal"
+        id="dog"
+        value="Dog"
+      />
+      <label class="animalSelectLabel" for="dog"> Dog </label>
+
+      <input
+        class="selectInput"
+        formControlName="animal"
+        type="radio"
+        name="animal"
+        id="cat"
+        value="Cat"
+      />
+      <label class="animalSelectLabel" for="cat">Cat</label>
+
+      <input
+        class="selectInput"
+        formControlName="animal"
+        type="radio"
+        name="animal"
+        id="other"
+        value="Other"
+      />
+      <label class="animalSelectLabel" for="other">Other pet</label>
+    </div>
+    <p class="title">Select Date:</p>
+    <div class="dateSelectContainer">
+      <div *ngFor="let date of dateValiants">
+        <input
+          class="selectInput"
+          formControlName="date"
+          type="radio"
+          name="date"
+          [id]="date"
+          [value]="date"
+        />
+        <label class="dateLabel" [for]="date"
+          ><span class="dayOfWeek">{{ date | date: "E" }}</span>
+          <span class="date">{{ date | date: "d" }}</span></label
+        >
+      </div>
+    </div>
+
+    <select class="select" formControlName="time">
+      <option disabled value="">Time</option>
+      <option value="9">9:00</option>
+      <option value="10">10:00</option>
+      <option value="11">11:00</option>
+      <option value="12">12:00</option>
+      <option value="13">13:00</option>
+      <option value="14">14:00</option>
+      <option value="15">15:00</option>
+      <option value="16">16:00</option>
+      <option value="17">17:00</option>
+    </select>
+
+    <input
+      class="primaryInput"
+      formControlName="phone"
+      type="tel"
+      placeholder="phone number"
+    />
+
+    <input
+      class="primaryInput"
+      formControlName="comments"
+      type="text"
+      placeholder="any comments?"
+    />
+
+    <button class="btn blackBtn" type="submit">Book Now</button>
+  </form>
+</div>

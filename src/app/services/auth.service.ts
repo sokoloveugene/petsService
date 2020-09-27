@@ -84,6 +84,7 @@ export class AuthService {
     } catch (err) {
       console.warn(err);
       this.logout();
+      return false;
     }
   }
 

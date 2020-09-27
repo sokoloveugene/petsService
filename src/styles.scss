@@ -9,3 +9,70 @@
 body {
   padding: 10px;
 }
+
+.primaryInput {
+  margin: 0 0 20px 0;
+  width: 100%;
+  display: block;
+  border: 1px solid transparent;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  padding: 10px 16px;
+  outline: none;
+  border-radius: 8px;
+  color: #0d0c22;
+  background-color: #f3f3f4;
+  transition: background-color 200ms ease, outline 200ms ease, color 200ms ease,
+    box-shadow 200ms ease;
+
+  &:hover,
+  &:focus {
+    background-color: #ffffff;
+    border-color: rgba(234, 76, 137, 0.4);
+    box-shadow: 0 0 0 4px rgba(234, 76, 137, 0.1);
+  }
+
+  &.ng-invalid.ng-touched {
+    box-shadow: 0 0 0 4px rgba(231, 59, 59, 0.178);
+  }
+
+  &.ng-valid.ng-touched {
+    box-shadow: 0 0 0 4px rgba(59, 231, 136, 0.178);
+  }
+}
+
+.btn {
+  display: block;
+  border-radius: 20px;
+  padding: 8px 22px;
+  border-color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.blackBtn {
+  border-color: black;
+  background-color: black;
+  color: rgb(226, 222, 222);
+}
+
+.greenBtn {
+  background-color: rgb(73, 211, 146);
+  color: rgb(43, 41, 41);
+}
+
+.whiteBtn {
+  background-color: #f3f3f4;
+  color: rgb(43, 41, 41);
+}
+
+.blueBtn {
+  background-color: rgb(96, 96, 247);
+  color: white;
+}

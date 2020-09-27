@@ -1,0 +1,24 @@
+.submitBtn {
+  background: #ea4c89;
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  transition: all 200ms ease;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  height: 40px;
+  user-select: none;
+
+  &:disabled {
+    background: #faadcb;
+  }
+}
+
+.label {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}

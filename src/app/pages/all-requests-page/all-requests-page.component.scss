@@ -1,0 +1,43 @@
+.container {
+  margin-bottom: 20px;
+  max-width: 500px;
+  min-height: 150px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #eeebeb;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+.dateCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: rgb(96, 96, 247);
+  color: white;
+  margin-bottom: 10px;
+}
+
+.month {
+  font-size: 10px;
+}
+
+.day {
+  font-size: 20px;
+}
+
+.text {
+  margin-bottom: 5px;
+  font-weight: 300;
+}
+
+.highlighted {
+  font-weight: 500;
+}
