@@ -3,7 +3,7 @@ import { consultationRequestInterface } from '../../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AlertService } from './alert.service';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class ConsultationService {
         'Unfortunatelly your request was not send, try again later'
       );
     };
-    console.log('sending request with ', JSON.stringify(request));
+
     this.http
       .post(
         `https://${environment.projectId}.firebaseio.com/consultationRequests.json`,
@@ -36,15 +36,14 @@ export class ConsultationService {
         `https://${environment.projectId}.firebaseio.com/consultationRequests.json`
       )
       .pipe(
+        filter((r) => r !== null),
         map((res) => {
-          if (res) {
-            return Object.keys(res)
-              .map((key) => ({
-                ...res[key],
-                requestId: key,
-              }))
-              .filter((item) => item.confirmed === false);
-          }
+          return Object.keys(res)
+            .map((key) => ({
+              ...res[key],
+              requestId: key,
+            }))
+            .filter((item) => item.confirmed === false);
         })
       );
   }
@@ -76,5 +75,13 @@ export class ConsultationService {
       `https://${environment.projectId}.firebaseio.com/consultationRequests/${id}.json`,
       update
     );
+  }
+
+  getRequestById(id: string) {
+    return this.http
+      .get(
+        `https://${environment.projectId}.firebaseio.com/consultationRequests/${id}.json`
+      )
+      .pipe(filter((r) => r !== null));
   }
 }

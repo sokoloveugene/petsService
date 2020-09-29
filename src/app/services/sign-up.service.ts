@@ -19,21 +19,29 @@ export class SignUpService {
   signUp(user: signUpInterface) {
     const next = (res: loginResponseInterface): void => {
       const expiresAt = Date.now() + Number(res.expiresIn) * 1000;
-      const isAdmin = user.email.includes('@test');
+      const isDoctor = user.email.includes('@doc');
+      const isAdmin = user.email.includes('@admin');
+
       try {
         localStorage.setItem('token', JSON.stringify(res.idToken));
+        localStorage.setItem('isDoctor', JSON.stringify(isDoctor));
         localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
         localStorage.setItem('expiresAt', JSON.stringify(expiresAt));
         localStorage.setItem('userId', JSON.stringify(res.localId));
 
         this.router.navigate(['']);
-        this.alertService.success(
-          `Dear,${
-            isAdmin ? 'Doctor' : 'Customer'
-          }, congratulations your account was successfully created`
-        );
+
+        if (isAdmin) {
+          this.alertService.success('Hello, Admin');
+        } else {
+          this.alertService.success(
+            `Dear, ${
+              isDoctor ? 'Doctor' : 'Customer'
+            }, congratulations your account was successfully created`
+          );
+        }
       } catch (err) {
-        console.warn;
+        console.warn(err);
       }
     };
 

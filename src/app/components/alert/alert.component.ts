@@ -25,18 +25,18 @@ export class AlertComponent implements OnInit, OnDestroy {
       this.type = alert.type;
 
       if (this.timeout) {
-        clearTimeout(this.timeout)
+        clearTimeout(this.timeout);
       }
-    
+
       this.timeout = setTimeout(() => {
-        this.close()
+        this.close();
         clearTimeout(this.timeout);
       }, this.delay);
     });
   }
 
   close() {
-    this.text = ""
+    this.text = '';
   }
 
   ngOnDestroy(): void {

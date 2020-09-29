@@ -1,9 +1,10 @@
+<app-back-home></app-back-home>
 <h2>Sign in to BLABLABLA</h2>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <p class="label">Email Address:</p>
+  <p class="primaryLabel">Email Address</p>
   <input class="primaryInput" formControlName="email" type="text" />
-  <p class="label">Password:</p>
+  <p class="primaryLabel">Password</p>
   <input class="primaryInput" formControlName="password" type="password" />
   <button class="submitBtn" type="submit">Login</button>
   <p>Not a member? <a routerLink="/sign_up">Sign up now</a></p>

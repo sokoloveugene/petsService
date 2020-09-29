@@ -16,7 +16,7 @@ export class DocGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    if (this.authService.isAdmin()) {
+    if (this.authService.isDoctor()) {
       return true;
     } else {
       this.router.navigate(['/']);

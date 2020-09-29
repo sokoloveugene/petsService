@@ -11,6 +11,7 @@ export const environment = {
   storageBucket: 'petsservice-35a24.appspot.com',
   messagingSenderId: '137178738209',
   appId: '1:137178738209:web:1d145ad964679543917d60',
+  defaultProfilePhotoUrl: "https://thumbs.dreamstime.com/b/woman-wearing-protective-face-mask-lungs-icon-smog-air-pollution-virus-protection-concept-girl-profile-avatar-female-cartoon-157710998.jpg",
 };
 
 /*

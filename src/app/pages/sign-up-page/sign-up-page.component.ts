@@ -72,10 +72,9 @@ export class SignUpPageComponent implements OnInit {
     )
       return;
 
-      
-    const {email, password} = this.form.value;
+    const { email, password } = this.form.value;
 
-    this.signUp.signUp({email, password});
+    this.signUp.signUp({ email, password });
     this.form.reset();
   }
 }

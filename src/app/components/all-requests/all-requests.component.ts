@@ -4,17 +4,18 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConsultationService } from 'src/app/services/consultation.service';
 import { consultationRequestInterface } from '../../../interfaces';
-import { ScheduleService } from '../../services/schedule.service';
+import { DocDataService } from '../../services/doc-data.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { switchMap } from 'rxjs/operators';
 import { zip, throwError } from 'rxjs';
+import { AppointmentUpdateService } from '../../services/appointment-update.service';
 
 @Component({
-  selector: 'app-all-requests-page',
-  templateUrl: './all-requests-page.component.html',
-  styleUrls: ['./all-requests-page.component.scss'],
+  selector: 'app-all-requests',
+  templateUrl: './all-requests.component.html',
+  styleUrls: ['./all-requests.component.scss'],
 })
-export class AllRequestsPageComponent implements OnInit, OnDestroy {
+export class AllRequestsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   sub: Subscription;
 
@@ -23,17 +24,27 @@ export class AllRequestsPageComponent implements OnInit, OnDestroy {
   constructor(
     private consultationService: ConsultationService,
     private auth: AuthService,
-    private schedule: ScheduleService,
-    private alert: AlertService
+    private docData: DocDataService,
+    private alert: AlertService,
+    private appointmentUpdate: AppointmentUpdateService
   ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
       docAnswer: new FormControl(''),
     });
+
+    const next = (r) => {
+      this.allRequests = r.sort(
+        (a, b) => a.desiredTimeForConsultation - b.desiredTimeForConsultation
+      );
+    };
+
+    const error = () => console.warn;
+
     this.sub = this.consultationService
       .getAllUnconfirmedConsultationRequests()
-      .subscribe((res) => (this.allRequests = res));
+      .subscribe(next, error);
   }
 
   ngOnDestroy() {
@@ -45,7 +56,6 @@ export class AllRequestsPageComponent implements OnInit, OnDestroy {
 
   confirmRequest(requestId: string, dutyTime: number) {
     const docId = this.auth.userId();
-
     const { value: enteredAnswer } = this.form.controls.docAnswer;
     const defaultAnswer = "I'll be glad to help. Sincerely, Doc";
     const update = {
@@ -54,16 +64,16 @@ export class AllRequestsPageComponent implements OnInit, OnDestroy {
       docId,
     };
 
-    this.schedule
-      .checkScedule(dutyTime, docId)
+    this.docData
+      .checkScedule(dutyTime)
       .pipe(
         switchMap((hasOrderAtThisTime) => {
           if (hasOrderAtThisTime !== null) {
             this.alert.warning('You have meeting on this date and time');
-            return throwError("Leave this request to another doctor");
+            return throwError('Leave this request to another doctor');
           } else {
             return zip(
-              this.schedule.createSchedule(requestId, dutyTime, docId),
+              this.docData.createSchedule(requestId, dutyTime),
               this.consultationService.confirmRequestById(requestId, update)
             );
           }
@@ -73,6 +83,9 @@ export class AllRequestsPageComponent implements OnInit, OnDestroy {
         this.allRequests = this.allRequests.filter(
           (item: consultationRequestInterface) => item.requestId !== requestId
         );
+
+        this.appointmentUpdate.update();
+
         this.alert.success('OK');
       }, console.warn);
   }

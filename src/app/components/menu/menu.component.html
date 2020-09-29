@@ -1,0 +1,76 @@
+<div class="menu">
+  <div class="menuHeader">
+    <svg
+      (click)="toggle()"
+      class="menuSvg"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      viewBox="0 0 24.75 24.75"
+      xml:space="preserve"
+    >
+      <path
+        d="M0,3.875c0-1.104,0.896-2,2-2h20.75c1.104,0,2,0.896,2,2s-0.896,2-2,2H2C0.896,5.875,0,4.979,0,3.875z M22.75,10.375H2
+		c-1.104,0-2,0.896-2,2c0,1.104,0.896,2,2,2h20.75c1.104,0,2-0.896,2-2C24.75,11.271,23.855,10.375,22.75,10.375z M22.75,18.875H2
+		c-1.104,0-2,0.896-2,2s0.896,2,2,2h20.75c1.104,0,2-0.896,2-2S23.855,18.875,22.75,18.875z"
+      />
+    </svg>
+
+    <div class="authContainer">
+      <button class="btn" *ngIf="!auth.isAuth()" [routerLink]="['/sign_up']">
+        Join now
+      </button>
+
+      <button
+        class="btn blackBtn"
+        *ngIf="!auth.isAuth()"
+        [routerLink]="['/login']"
+      >
+        Login &#8250;
+      </button>
+
+      <button
+        class="btn blackBtn"
+        *ngIf="auth.isAuth()"
+        (click)="auth.logout()"
+      >
+        Log Out
+      </button>
+    </div>
+  </div>
+
+  <ul *ngIf="visible" class="menuContent">
+    <li
+      class="listItem"
+      *ngIf="auth.isAuth() && auth.isDoctor()"
+      [routerLink]="['/all_requests']"
+    >
+      <span class="menuItem">ALL requests</span>
+    </li>
+
+    <li
+      class="listItem"
+      *ngIf="auth.isAuth()"
+      [routerLink]="['/user_requests']"
+    >
+      <span class="menuItem">Your requests</span>
+    </li>
+
+    <li class="listItem" [routerLink]="['/shop']">
+      <span class="menuItem">Shop</span>
+    </li>
+
+    <li class="listItem" [routerLink]="['/about']">
+      <span class="menuItem">About</span>
+    </li>
+
+    <li
+      class="listItem"
+      *ngIf="auth.isAuth() && auth.isAdmin()"
+      [routerLink]="['/create_product']"
+    >
+      <span class="menuItem">Create product</span>
+    </li>
+  </ul>
+</div>

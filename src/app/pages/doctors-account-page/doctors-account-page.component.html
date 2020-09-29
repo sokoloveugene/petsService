@@ -1,0 +1,20 @@
+<app-back-home></app-back-home>
+
+<div class="container">
+  <div class="aside">
+    <app-profile-card></app-profile-card>
+    <app-active-appointments
+      (showModalById)="showModal($event)"
+    ></app-active-appointments>
+  </div>
+
+  <div class="main">
+    <app-all-requests></app-all-requests>
+  </div>
+</div>
+
+<app-modal-appointment
+  [id]="idForModal"
+  (onClose)="closeModal()"
+  *ngIf="modalVisible"
+></app-modal-appointment>

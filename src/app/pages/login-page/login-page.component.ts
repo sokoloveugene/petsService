@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router, private alertServise: AlertService) {}
+  constructor(private auth: AuthService, private alertServise: AlertService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -45,7 +45,7 @@ export class LoginPageComponent implements OnInit {
     }
     if (errorText) {
       this.alertServise.error(errorText);
-      return
+      return;
     }
     this.auth.login(this.form.value);
     this.form.reset();

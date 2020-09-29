@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ConsultationService } from 'src/app/services/consultation.service';
 import { consultationRequestInterface } from '../../../interfaces';
 import { zip } from 'rxjs';
-import { ScheduleService } from 'src/app/services/schedule.service';
+import { DocDataService } from '../../services/doc-data.service';
 
 @Component({
   selector: 'app-user-requests-page',
@@ -22,7 +22,7 @@ export class UserRequestsPageComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private consultationService: ConsultationService,
-    private schedule: ScheduleService
+    private docData: DocDataService
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class UserRequestsPageComponent implements OnInit, OnDestroy {
 
     if (confirmed) {
       this.deleteConfirmedSub = zip(
-        this.schedule.deleteOrder(dutyTime, docId),
+        this.docData.deleteOrder(dutyTime, docId),
         this.consultationService.deleteRequestById(id)
       ).subscribe(next);
     } else {

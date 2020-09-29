@@ -1,29 +1,12 @@
 .workspace {
   border-radius: 20px;
-  max-width: 360px;
+  width: 100%;
   padding: 20px;
   background-color: #eeebeb;
 }
 
-.logout {
-  justify-self: flex-end;
-}
-
 .description {
   margin-bottom: 10px;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.authContainer {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  margin-bottom: 20px;
 }
 
 .animalSelectContainer {
@@ -78,36 +61,4 @@
 
 .date {
   font-size: 12px;
-}
-
-.select {
-  padding-left: 10px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  width: 80px;
-  height: 35px;
-  margin: 0 0 20px 0;
-  border-radius: 10px;
-  border: none;
-  color: #0d0c22;
-  background-color: #f3f3f4;
-  transition: background-color 200ms ease, outline 200ms ease, color 200ms ease,
-    box-shadow 200ms ease;
-
-  &:hover,
-  &:focus {
-    outline: none;
-    background-color: #ffffff;
-    border-color: rgba(234, 76, 137, 0.4);
-    box-shadow: 0 0 0 4px rgba(234, 76, 137, 0.1);
-  }
-
-  &.ng-invalid.ng-touched {
-    box-shadow: 0 0 0 4px rgba(231, 59, 59, 0.178);
-  }
-
-  &.ng-valid.ng-touched {
-    box-shadow: 0 0 0 4px rgba(59, 231, 136, 0.178);
-  }
 }

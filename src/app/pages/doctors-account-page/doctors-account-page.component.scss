@@ -1,0 +1,26 @@
+.aside {
+  padding: 0 20px;
+}
+
+.main {
+}
+
+.container {
+}
+
+@media (min-width: 768px) {
+  .aside {
+    flex-basis: 25%;
+    min-height: 100vh;
+    background-color: #fbfcfe;
+  }
+
+  .main {
+    flex-grow: 1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}

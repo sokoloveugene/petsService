@@ -1,47 +1,10 @@
+<app-back-home></app-back-home>
+
 <p>USER PAGE REQUESTS</p>
 
 <div class="container" *ngFor="let request of userRequests">
-  <div class="content">
-    <div
-      class="dateCard"
-      [ngClass]="{
-        confirmed: request.confirmed,
-        notConfirmed: !request.confirmed
-      }"
-    >
-      <span class="day">{{ request.date | date: "d" }}</span>
-      <span class="month">{{ request.date | date: "MMMM" }}</span>
-      <span class="time">{{
-        request.desiredTimeForConsultation | date: "HH:mm"
-      }}</span>
-    </div>
-    <p class="text">
-      <span class="highlighted">Customers name:</span>
-      {{ request.customersName }}
-    </p>
-    <p class="text">
-      <span class="highlighted">Phone:</span> {{ request.phone }}
-    </p>
-    <p class="text">
-      <span class="highlighted">Animal:</span> {{ request.animal }}
-    </p>
-    <p class="text">
-      <span class="highlighted">Status: </span>
-      <span *ngIf="request.confirmed; else notConfirmed"
-        >Confirmed by @{{ request.docId }}</span
-      >
-      <ng-template #notConfirmed>
-        <span>Waiting for confirmation</span>
-      </ng-template>
-    </p>
+  <app-user-request [request]="request"></app-user-request>
 
-    <div class="smallTalk">
-      <p class="message from-user">{{ request.comments }}</p>
-      <p *ngIf="request.docAnswer" class="message from-doc">
-        {{ request.docAnswer }}
-      </p>
-    </div>
-  </div>
   <button
     class="cancelBtn"
     (click)="

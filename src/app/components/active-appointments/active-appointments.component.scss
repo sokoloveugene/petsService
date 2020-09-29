@@ -1,0 +1,41 @@
+.container {
+  margin-bottom: 36px;
+}
+
+.appointment {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  width: 100%;
+  border-radius: 10px;
+  user-select: none;
+  margin-bottom: 10px;
+  border: none;
+  color: #11aedc;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+  background: linear-gradient(100deg, #dff3f9 30%, #ffffff 50%, #dff3f9 70%);
+  background-size: 500%;
+  animation: waiting 2s ease-in-out infinite;
+}
+
+.time {
+  flex-basis: 70%;
+}
+
+.svg {
+  height: 20px;
+  fill: #11aedc;
+  margin-right: 10px;
+  flex-basis: 30%;
+}
+
+@keyframes waiting {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

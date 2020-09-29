@@ -1,0 +1,33 @@
+<app-back-home></app-back-home>
+<h1>profile-settings-page works!</h1>
+
+<div class="imgContainer">
+  <img class="img" [src]="photoToShow" alt="profile photo" />
+</div>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <p class="primaryLabel">Enter Instagram username to change profile photo</p>
+  <input
+    class="primaryInput"
+    formControlName="insta"
+    type="text"
+    (blur)="loadPhotoUrlFromInstagram($event)"
+  />
+  <p class="primaryLabel">Surname</p>
+  <input class="primaryInput" formControlName="surname" type="text" />
+  <p class="primaryLabel">Name</p>
+  <input class="primaryInput" formControlName="name" type="text" />
+  <p class="primaryLabel">Phone</p>
+  <input
+    class="primaryInput"
+    formControlName="phone"
+    type="text"
+    placeholder="phone"
+  />
+  <p class="primaryLabel">Year of start your doctors carrer</p>
+  <input class="primaryInput" formControlName="startCareer" type="text" />
+  <p class="primaryLabel">Biography</p>
+  <input class="primaryInput" formControlName="biography" type="text" />
+
+  <button class="btn blueBtn" type="submit">Save</button>
+</form>

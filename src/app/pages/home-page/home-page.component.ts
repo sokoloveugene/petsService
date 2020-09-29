@@ -6,7 +6,6 @@ import { consultationRequestInterface } from '../../../interfaces';
 import { ConsultationService } from '../../services/consultation.service';
 import { MyValidators } from '../../services/my.validators';
 
-import { from } from 'rxjs';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -59,8 +58,6 @@ export class HomePageComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
-
     if (!this.auth.isAuth()) {
       try {
         localStorage.setItem(
@@ -80,18 +77,18 @@ export class HomePageComponent implements OnInit {
       return;
     }
 
-    const {date, time} = this.form.value;
-    const desiredTimeForConsultation = new Date(date).setHours(Number(time))
-    
+    const { date, time } = this.form.value;
+    const desiredTimeForConsultation = new Date(date).setHours(Number(time));
+
     const consultationRequest: consultationRequestInterface = {
       ...this.form.value,
       userID: this.auth.userId(),
       confirmed: false,
-      desiredTimeForConsultation
+      desiredTimeForConsultation,
     };
     this.consultationService.sendRequest(consultationRequest);
     this.form.reset();
-    this.form.controls['phone'].setValue("+380");
-    this.form.controls['time'].setValue("");
+    this.form.controls['phone'].setValue('+380');
+    this.form.controls['time'].setValue('');
   }
 }

@@ -6,8 +6,11 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { UserRequestsPageComponent } from './pages/user-requests-page/user-requests-page.component';
 import { AuthGuard } from './routeGuards/auth.guard';
 import { AuthInversionGuard } from './routeGuards/auth-inversion.guard';
-import { AllRequestsPageComponent } from './pages/all-requests-page/all-requests-page.component';
+import { DoctorsAccountPageComponent } from './pages/doctors-account-page/doctors-account-page.component';
 import { DocGuard } from './routeGuards/doc.guard';
+import { ProfileSettingsPageComponent } from './pages/profile-settings-page/profile-settings-page.component';
+import { ShopPageComponent } from './pages/shop-page/shop-page.component';
+import { CreateProductPageComponent } from './pages/create-product-page/create-product-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -28,9 +31,16 @@ const routes: Routes = [
   },
   {
     path: 'all_requests',
-    component: AllRequestsPageComponent,
+    component: DoctorsAccountPageComponent,
     canActivate: [AuthGuard, DocGuard],
   },
+  {
+    path: 'profile_settings',
+    component: ProfileSettingsPageComponent,
+    canActivate: [AuthGuard, DocGuard],
+  },
+  { path: 'shop', component: ShopPageComponent },
+  { path: 'create_product', component: CreateProductPageComponent },
 ];
 
 @NgModule({

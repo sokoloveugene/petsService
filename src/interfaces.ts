@@ -24,3 +24,34 @@ export interface consultationRequestInterface {
   time?: string;
   desiredTimeForConsultation?: number;
 }
+
+export interface profileDataInterface {
+  name: string;
+  surname: string;
+  expirence: number;
+  phone: string;
+  photoUrl: string;
+  biography: string;
+  startCareer: string;
+  insta?: string;
+}
+
+export type animalTypes = 'cats' | 'dogs' | 'fishes' | 'reptiles' | 'others';
+
+export type categoryTypes =
+  | 'food'
+  | 'toys'
+  | 'medicines'
+  | 'accessories'
+  | 'charity';
+
+export interface shopItemInterface {
+  url: string;
+  name: string;
+  details: string;
+  price: number;
+  category: categoryTypes;
+  animal: animalTypes;
+  available: number;
+  itemId?: string;
+}
