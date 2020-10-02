@@ -36,7 +36,7 @@ export interface profileDataInterface {
   insta?: string;
 }
 
-export type animalTypes = 'cats' | 'dogs' | 'fishes' | 'reptiles' | 'others';
+export type animalTypes = 'cats' | 'dogs' | 'fishes' | 'rodents' | 'others';
 
 export type categoryTypes =
   | 'food'
@@ -54,4 +54,16 @@ export interface shopItemInterface {
   animal: animalTypes;
   available: number;
   itemId?: string;
+}
+
+export interface cartItem {
+  url: string;
+  name: string;
+  details: string;
+  price: number;
+  category: categoryTypes;
+  animal: animalTypes;
+  available: number;
+  itemId: string;
+  amount: number;
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 import { shopItemInterface } from '../../../interfaces';
 @Component({
   selector: 'app-shop-product',
@@ -12,6 +13,8 @@ export class ShopProductComponent {
   liked = false;
   amount = 1;
   sum: number;
+
+  constructor(private alert: AlertService) {}
 
   increase() {
     if (this.amount < this.item.available) {
@@ -35,29 +38,54 @@ export class ShopProductComponent {
         localStorage.getItem('cart')
       );
 
+      switch (true) {
+        case cart === null:
+          localStorage.setItem(
+            'cart',
+            JSON.stringify({ [this.item.itemId]: this.amount })
+          );
+          break;
+
+        case cart.hasOwnProperty(this.item.itemId):
+          localStorage.setItem(
+            'cart',
+            JSON.stringify({
+              ...cart,
+              [this.item.itemId]: cart[this.item.itemId] + this.amount,
+            })
+          );
+          break;
+
+        default:
+          localStorage.setItem(
+            'cart',
+            JSON.stringify({ ...cart, [this.item.itemId]: this.amount })
+          );
+      }
+
+      let itemsInCart;
       if (cart === null) {
-        localStorage.setItem(
-          'cart',
-          JSON.stringify({ [this.item.itemId]: this.amount })
-        );
-      } else if (cart.hasOwnProperty(this.item.itemId)) {
-        localStorage.setItem(
-          'cart',
-          JSON.stringify({
-            ...cart,
-            [this.item.itemId]: cart[this.item.itemId] + this.amount,
-          })
-        );
+        itemsInCart = this.amount;
       } else {
-        localStorage.setItem(
-          'cart',
-          JSON.stringify({ ...cart, [this.item.itemId]: this.amount })
+        itemsInCart = Object.values(cart).reduce(
+          (acc, v) => acc + v,
+          this.amount
         );
       }
+
+      this.alert.success(
+        `You have ${itemsInCart} ${
+          itemsInCart === 1 ? 'item' : 'items'
+        } in cart`
+      );
+
+      this.item.available = this.item.available - this.amount;
     } catch {
       console.warn;
       localStorage.clear();
     }
+
+    this.amount = 1;
   }
 
   like() {

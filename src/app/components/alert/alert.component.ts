@@ -1,15 +1,60 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
+import { switchMap, filter, tap } from 'rxjs/operators';
 import { AlertService } from '../../../app/services/alert.service';
+
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
-export class AlertComponent implements OnInit, OnDestroy {
-  @Input() delay = 4000;
+export class AlertComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Input() delay = 2500;
+
+  private contentPlaceholder: ElementRef;
+
+  @ViewChild('contentPlaceholder', { static: false }) set content(
+    content: ElementRef
+  ) {
+    if (content) {
+      this.contentPlaceholder = content;
+
+      const touchstart$ = fromEvent(
+        this.contentPlaceholder.nativeElement,
+        'touchstart'
+      );
+      const touchend$ = fromEvent(
+        this.contentPlaceholder.nativeElement,
+        'touchend'
+      );
+
+      this.closeSub = touchstart$
+        .pipe(
+          switchMap((prevEvent) => {
+            return touchend$.pipe(
+              filter(
+                (e) =>
+                  e['changedTouches'][0]['clientY'] -
+                    prevEvent['touches'][0]['clientY'] >
+                  20
+              )
+            );
+          })
+        )
+        .subscribe((e) => this.close());
+    }
+  }
 
   alertSub: Subscription;
+  closeSub: Subscription;
 
   public text: string;
 
@@ -34,6 +79,8 @@ export class AlertComponent implements OnInit, OnDestroy {
       }, this.delay);
     });
   }
+
+  ngAfterViewInit(): void {}
 
   close() {
     this.text = '';

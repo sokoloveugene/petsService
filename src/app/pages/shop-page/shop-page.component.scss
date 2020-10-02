@@ -1,0 +1,35 @@
+.container {
+  margin-bottom: 110px;
+}
+
+.listTitle {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.filterslist {
+  list-style: none;
+  font-size: 20px;
+  margin-bottom: 20px;
+  user-select: none;
+}
+
+.checkbox {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  height: 17px;
+  width: 17px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+  .wrapper {
+    margin: 0 40px;
+  }
+}

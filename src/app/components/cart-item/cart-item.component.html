@@ -1,0 +1,13 @@
+<div>
+  <div>
+    <img [src]="item.url" [alt]="item.name" />
+  </div>
+  <p>{{ item.name }}</p>
+
+  <div class="controlGroup">
+    <button (click)="remove.emit(item.itemId)" class="controlBtn">-</button>
+    <p>{{ item.amount }}</p>
+    <button (click)="add.emit(item.itemId)" class="controlBtn">+</button>
+  </div>
+  <button (click)="delete.emit(item.itemId)">DELETE</button>
+</div>

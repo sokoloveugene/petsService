@@ -6,9 +6,12 @@
 }
 
 body {
-  padding: 10px;
-  background-color: #f6f9fe;
+  background-color: #ffffff;
   color: #0a1429;
+}
+
+.loginForm {
+  max-width: 450px;
 }
 
 .sectionTitle {
@@ -47,6 +50,10 @@ body {
   &.ng-valid.ng-touched {
     box-shadow: 0 0 0 4px rgba(59, 231, 136, 0.178);
   }
+
+  &::placeholder {
+    color: rgb(176, 176, 176);
+  }
 }
 
 .primaryLabel {
@@ -56,16 +63,17 @@ body {
 }
 
 .primarySelect {
-  padding-left: 10px;
+  text-align: center;
+  padding: 10px 16px;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  height: 35px;
   margin: 0 40px 20px 0;
   border-radius: 10px;
   border: none;
-  color: #0d0c22;
   background-color: #f3f3f4;
+  color: rgb(176, 176, 176);
+  cursor: pointer;
   transition: background-color 200ms ease, outline 200ms ease, color 200ms ease,
     box-shadow 200ms ease;
 
@@ -86,10 +94,43 @@ body {
   }
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.submitBtn {
+  background: #ea4c89;
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  transition: all 200ms ease;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  height: 40px;
+  user-select: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    background: #f8609a;
+  }
+}
+
 .btn {
   display: block;
   border-radius: 20px;
-  padding: 8px 22px;
+  padding: 12px 24px;
   border-color: transparent;
   background-color: transparent;
   cursor: pointer;
@@ -112,7 +153,6 @@ body {
   margin-bottom: 40px;
 }
 
-
 .blackBtn {
   border-color: black;
   background-color: black;
@@ -125,11 +165,59 @@ body {
 }
 
 .whiteBtn {
-  background-color: #f3f3f4;
+  background-color: #ffffff;
   color: rgb(43, 41, 41);
+  border: 1px solid #000000;
 }
 
 .blueBtn {
   background-color: rgb(96, 96, 247);
   color: white;
+}
+
+.mainContainer {
+  padding: 0 10px;
+}
+
+.backdrop {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(24, 24, 24, 0.61);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #f1f4f8;
+  padding: 20px;
+  width: 80%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.controlGroup {
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
+  flex-basis: 100px;
+  align-items: center;
+  border: 2px solid #e4e2e2;
+  border-radius: 20px;
+}
+
+.controlBtn {
+  height: 30px;
+  width: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 }

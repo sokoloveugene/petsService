@@ -11,6 +11,7 @@ import { DocGuard } from './routeGuards/doc.guard';
 import { ProfileSettingsPageComponent } from './pages/profile-settings-page/profile-settings-page.component';
 import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { CreateProductPageComponent } from './pages/create-product-page/create-product-page.component';
+import { CartPageComponent } from './pages/cart-page/cart-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   },
   { path: 'shop', component: ShopPageComponent },
   { path: 'create_product', component: CreateProductPageComponent },
+  {path: 'cart', component: CartPageComponent}
 ];
 
 @NgModule({

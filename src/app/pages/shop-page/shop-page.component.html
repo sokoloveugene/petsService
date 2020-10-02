@@ -1,3 +1,135 @@
 <app-back-home></app-back-home>
 
-<app-shop-product [item]="item" *ngFor="let item of items"></app-shop-product>
+<div class="mainContainer wrapper">
+  <input
+    type="text"
+    class="primaryInput"
+    placeholder="Search"
+    [(ngModel)]="search"
+  />
+
+  <button class="primarySelect" (click)="toggleFilterVisibility()">
+    {{ filtersVisible ? "Reset filters" : "Show filters" }}
+  </button>
+
+  <div *ngIf="filtersVisible">
+    <ul class="filterslist">
+      <p class="listTitle">Animal:</p>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectAnimalType($event)"
+            type="checkbox"
+            value="cats"
+          />Cats</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectAnimalType($event)"
+            type="checkbox"
+            value="dogs"
+          />Dogs</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectAnimalType($event)"
+            type="checkbox"
+            value="fishes"
+          />Fishes</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectAnimalType($event)"
+            type="checkbox"
+            value="rodents"
+          />Rodents</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectAnimalType($event)"
+            type="checkbox"
+            value="others"
+          />Others</label
+        >
+      </li>
+    </ul>
+
+    <ul class="filterslist">
+      <p class="listTitle">Category:</p>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectCategory($event)"
+            type="checkbox"
+            value="food"
+          />Food</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectCategory($event)"
+            type="checkbox"
+            value="toys"
+          />Toys</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectCategory($event)"
+            type="checkbox"
+            value="medicines"
+          />Medicines</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectCategory($event)"
+            type="checkbox"
+            value="accessories"
+          />Accessories</label
+        >
+      </li>
+      <li>
+        <label
+          ><input
+            class="checkbox"
+            (change)="selectCategory($event)"
+            type="checkbox"
+            value="charity"
+          />Charity</label
+        >
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <div
+      class="wrapper"
+      *ngFor="
+        let item of items | filterProducts: search:animalFilters:categoryFilters
+      "
+    >
+      <app-shop-product class="card" [item]="item"></app-shop-product>
+    </div>
+  </div>
+</div>

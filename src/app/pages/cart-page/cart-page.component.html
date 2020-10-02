@@ -1,0 +1,11 @@
+<p>cart-page works!</p>
+
+<app-cart-item
+  (add)="addMore($event)"
+  (remove)="addLess($event)"
+  (delete)="deleteFromCart($event)"
+  *ngFor="let item of cartItems"
+  [item]="item"
+></app-cart-item>
+
+<h1>{{ total }}</h1>

@@ -1,17 +1,26 @@
-<app-back-home></app-back-home>
-<h1>SIGN UP PAGE</h1>
-<p>signup-page works!</p>
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <p class="primaryLabel">Email Address</p>
-  <input class="primaryInput" formControlName="email" type="text" />
-  <p class="primaryLabel">Password</p>
-  <input class="primaryInput" formControlName="password" type="password" />
-  <p class="primaryLabel">Confirm password</p>
-  <input
-    class="primaryInput"
-    formControlName="passwordConfirm"
-    type="password"
-  />
-  <button type="submit">Sign up</button>
-  <p>Not a member? <a routerLink="/login">Log in</a></p>
-</form>
+<div class="pageWrapper">
+  <app-back-home></app-back-home>
+  <div class="banner"></div>
+
+  <div class="aside">
+    <form
+      class="loginForm mainContainer"
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+      <h2 class="header">SIGN UP PAGE</h2>
+      <p class="primaryLabel">Email Address</p>
+      <input class="primaryInput" formControlName="email" type="text" />
+      <p class="primaryLabel">Password</p>
+      <input class="primaryInput" formControlName="password" type="password" />
+      <p class="primaryLabel">Confirm password</p>
+      <input
+        class="primaryInput"
+        formControlName="passwordConfirm"
+        type="password"
+      />
+      <button class="submitBtn" type="submit">Sign up</button>
+      <p>Not a member? <a routerLink="/login">Log in</a></p>
+    </form>
+  </div>
+</div>

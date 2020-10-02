@@ -7,10 +7,62 @@
 }
 
 .error {
+  color: #fff;
   background-color: #ef5350;
 }
 
 .alert {
-  padding: 20px;
-  color: #ffffff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  min-height: 100px;
+  width: 100vw;
+  padding: 8px 28px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  user-select: none;
+}
+
+.closure {
+  display: block;
+  margin: 10px 0 20px 0;
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  background-color: rgba(204, 204, 204, 0.568);
+  animation-delay: 300ms;
+  animation: bounce 1s;
+  position: relative;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    top: 0px;
+  }
+  40% {
+    top: 2px;
+  }
+  60% {
+    top: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .closure {
+    display: none;
+  }
+
+  .alert {
+    justify-content: center;
+  }
 }

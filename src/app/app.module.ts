@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -22,6 +22,9 @@ import { UserRequestComponent } from './components/user-request/user-request.com
 import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { ShopProductComponent } from './components/shop-product/shop-product.component';
 import { CreateProductPageComponent } from './pages/create-product-page/create-product-page.component';
+import { FilterProductsPipe } from './pipes/filter-products.pipe';
+import { CartPageComponent } from './pages/cart-page/cart-page.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { CreateProductPageComponent } from './pages/create-product-page/create-p
     ShopPageComponent,
     ShopProductComponent,
     CreateProductPageComponent,
+    FilterProductsPipe,
+    CartPageComponent,
+    CartItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +56,7 @@ import { CreateProductPageComponent } from './pages/create-product-page/create-p
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

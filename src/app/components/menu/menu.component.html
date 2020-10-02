@@ -1,4 +1,4 @@
-<div class="menu">
+<div class="menu mainContainer">
   <div class="menuHeader">
     <svg
       (click)="toggle()"
@@ -18,7 +18,7 @@
     </svg>
 
     <div class="authContainer">
-      <button class="btn" *ngIf="!auth.isAuth()" [routerLink]="['/sign_up']">
+      <button class="btn whiteBtn" *ngIf="!auth.isAuth()" [routerLink]="['/sign_up']">
         Join now
       </button>
 
@@ -59,6 +59,10 @@
 
     <li class="listItem" [routerLink]="['/shop']">
       <span class="menuItem">Shop</span>
+    </li>
+
+    <li class="listItem" [routerLink]="['/cart']">
+      <span class="menuItem">Cart</span>
     </li>
 
     <li class="listItem" [routerLink]="['/about']">

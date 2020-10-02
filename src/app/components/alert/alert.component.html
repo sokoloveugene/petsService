@@ -1,10 +1,11 @@
 <div
   *ngIf="text"
+  #contentPlaceholder
   class="alert"
   [class.success]="type === 'success'"
   [class.warning]="type === 'warning'"
   [class.error]="type === 'error'"
-  (click)="close()"
 >
+<div class="closure"></div>
   <p>{{ text }}</p>
 </div>
