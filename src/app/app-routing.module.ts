@@ -42,7 +42,7 @@ const routes: Routes = [
   },
   { path: 'shop', component: ShopPageComponent },
   { path: 'create_product', component: CreateProductPageComponent },
-  {path: 'cart', component: CartPageComponent}
+  { path: 'cart', component: CartPageComponent },
 ];
 
 @NgModule({

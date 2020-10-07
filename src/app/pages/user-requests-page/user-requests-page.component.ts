@@ -5,6 +5,7 @@ import { ConsultationService } from 'src/app/services/consultation.service';
 import { consultationRequestInterface } from '../../../interfaces';
 import { zip } from 'rxjs';
 import { DocDataService } from '../../services/doc-data.service';
+import { SpinerService } from 'src/app/services/spiner.service';
 
 @Component({
   selector: 'app-user-requests-page',
@@ -14,23 +15,33 @@ import { DocDataService } from '../../services/doc-data.service';
 export class UserRequestsPageComponent implements OnInit, OnDestroy {
   subscriptions: SubscriptionLike[] = [];
   deleteConfirmedSub: Subscription;
-
   userID: string;
-
-  userRequests: Array<consultationRequestInterface>;
+  userRequests: Array<consultationRequestInterface> = [];
+  docModalId: string;
+  modalVisibility = false;
 
   constructor(
     private authService: AuthService,
     private consultationService: ConsultationService,
-    private docData: DocDataService
+    private docData: DocDataService,
+    private spiner: SpinerService
   ) {}
 
   ngOnInit(): void {
+    this.spiner.loadingStart();
     this.userID = this.authService.userId();
     this.subscriptions.push(
       this.consultationService
         .getConsultationRequestsById(this.userID)
-        .subscribe((res) => (this.userRequests = res))
+        .subscribe(
+          (res) => {
+            if (res) {
+              this.userRequests = res;
+            }
+          },
+          null,
+          () => this.spiner.loadingEnd()
+        )
     );
   }
 
@@ -66,5 +77,15 @@ export class UserRequestsPageComponent implements OnInit, OnDestroy {
         this.consultationService.deleteRequestById(id).subscribe(next)
       );
     }
+  }
+
+  showModal(id: string) {
+    this.docModalId = id;
+    this.modalVisibility = true;
+  }
+
+  closeModal() {
+    this.docModalId = null;
+    this.modalVisibility = false;
   }
 }

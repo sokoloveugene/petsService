@@ -1,6 +1,7 @@
-<div class="menu mainContainer">
+<div class="menu">
   <div class="menuHeader">
     <svg
+    *ngIf="mobileDevice"
       (click)="toggle()"
       class="menuSvg"
       xmlns="http://www.w3.org/2000/svg"
@@ -16,6 +17,8 @@
 		c-1.104,0-2,0.896-2,2s0.896,2,2,2h20.75c1.104,0,2-0.896,2-2S23.855,18.875,22.75,18.875z"
       />
     </svg>
+
+    <app-menu-links [inline]="true" *ngIf="!mobileDevice"></app-menu-links>
 
     <div class="authContainer">
       <button class="btn whiteBtn" *ngIf="!auth.isAuth()" [routerLink]="['/sign_up']">
@@ -40,41 +43,5 @@
     </div>
   </div>
 
-  <ul *ngIf="visible" class="menuContent">
-    <li
-      class="listItem"
-      *ngIf="auth.isAuth() && auth.isDoctor()"
-      [routerLink]="['/all_requests']"
-    >
-      <span class="menuItem">ALL requests</span>
-    </li>
-
-    <li
-      class="listItem"
-      *ngIf="auth.isAuth()"
-      [routerLink]="['/user_requests']"
-    >
-      <span class="menuItem">Your requests</span>
-    </li>
-
-    <li class="listItem" [routerLink]="['/shop']">
-      <span class="menuItem">Shop</span>
-    </li>
-
-    <li class="listItem" [routerLink]="['/cart']">
-      <span class="menuItem">Cart</span>
-    </li>
-
-    <li class="listItem" [routerLink]="['/about']">
-      <span class="menuItem">About</span>
-    </li>
-
-    <li
-      class="listItem"
-      *ngIf="auth.isAuth() && auth.isAdmin()"
-      [routerLink]="['/create_product']"
-    >
-      <span class="menuItem">Create product</span>
-    </li>
-  </ul>
+  <app-menu-links *ngIf="visible && mobileDevice"></app-menu-links>
 </div>

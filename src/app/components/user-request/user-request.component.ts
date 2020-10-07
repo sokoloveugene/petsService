@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { consultationRequestInterface } from '../../../interfaces';
 @Component({
   selector: 'app-user-request',
   templateUrl: './user-request.component.html',
   styleUrls: ['./user-request.component.scss'],
 })
-export class UserRequestComponent implements OnInit {
+export class UserRequestComponent{
   @Input() request: consultationRequestInterface;
   @Input() convertForDoc: boolean;
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Output() showInfoModal: EventEmitter<string> = new EventEmitter()
 }

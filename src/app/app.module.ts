@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -23,8 +23,23 @@ import { ShopPageComponent } from './pages/shop-page/shop-page.component';
 import { ShopProductComponent } from './components/shop-product/shop-product.component';
 import { CreateProductPageComponent } from './pages/create-product-page/create-product-page.component';
 import { FilterProductsPipe } from './pipes/filter-products.pipe';
-import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { CartPageComponent } from './pages/cart-page/cart-page.component';
+import { MenuLinksComponent } from './components/menu-links/menu-links.component';
+import { ModalDoctorDataComponent } from './components/modal-doctor-data/modal-doctor-data.component';
+import { NoRequestsPlaceholderComponent } from './components/no-requests-placeholder/no-requests-placeholder.component';
+import { CartEmptyPlaceholderComponent } from './components/cart-empty-placeholder/cart-empty-placeholder.component';
+import { NoUserRequestsPlaceholderComponent } from './components/no-user-requests-placeholder/no-user-requests-placeholder.component';
+import { SpinerComponent } from './components/spiner/spiner.component';
+import { YearsOfExperincePipe } from './pipes/years-of-experince.pipe';
+import {AuthInterceptor} from "./auth.interceptor";
+import { HomepagePlaceholderComponent } from './components/homepage-placeholder/homepage-placeholder.component';
+
+const INTERCAPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor 
+}
 
 @NgModule({
   declarations: [
@@ -47,8 +62,16 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     ShopProductComponent,
     CreateProductPageComponent,
     FilterProductsPipe,
-    CartPageComponent,
     CartItemComponent,
+    CartPageComponent,
+    MenuLinksComponent,
+    ModalDoctorDataComponent,
+    NoRequestsPlaceholderComponent,
+    CartEmptyPlaceholderComponent,
+    NoUserRequestsPlaceholderComponent,
+    SpinerComponent,
+    YearsOfExperincePipe,
+    HomepagePlaceholderComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +81,7 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
     BrowserAnimationsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [INTERCAPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

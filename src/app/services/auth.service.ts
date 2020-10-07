@@ -39,9 +39,7 @@ export class AuthService {
           this.alertService.success('Hello, Admin');
         } else {
           this.alertService.success(
-            `Dear, ${
-              isDoctor ? 'Doctor' : 'Customer'
-            }, congratulations your account was successfully created`
+            `You were logged in as ${isDoctor ? 'Doctor' : 'Customer'}`
           );
         }
       } catch (err) {
@@ -108,6 +106,15 @@ export class AuthService {
   userId() {
     try {
       return JSON.parse(localStorage.getItem('userId'));
+    } catch (err) {
+      console.warn(err);
+      this.logout();
+    }
+  }
+
+  getToken() {
+    try {
+      return JSON.parse(localStorage.getItem('token'));
     } catch (err) {
       console.warn(err);
       this.logout();

@@ -1,34 +1,10 @@
-.aside {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-@media (min-width: 768px) {
-  .aside {
-    flex-basis: 65%;  
-  }
-
-  .pageWrapper {
-    display: flex;
-  }
-
+@media(min-width: 768px) {
   .banner {
-    height: 100vh;
-    flex-basis: 35%;
-    background-image: url("../../images/Yellow-in-Basic11.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .submitBtn {
-    width: 50%;
-  }
-}
-
-.header {
-  font-size: 30px;
-  margin-bottom: 20px;
+      height: 100vh;
+      flex-basis: 35%;
+      background-image: url("../../images/Yellow-in-Basic11.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 }

@@ -1,16 +1,10 @@
-.aside {
+.sideBar {
   padding: 0 20px;
 }
 
-.main {
-}
-
-.container {
-}
-
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   .aside {
-    flex-basis: 25%;
+    flex-basis: 30%;
     min-height: 100vh;
     background-color: #fbfcfe;
   }

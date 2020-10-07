@@ -1,0 +1,27 @@
+.cartContainer {
+  max-width: 500px;
+  margin: 0 auto;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.radioItem {
+  margin-bottom: 8px;
+}
+
+.radioName {
+  margin-left: 10px;
+}
+
+.total {
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: end;
+}

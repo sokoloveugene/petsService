@@ -21,7 +21,6 @@ export class ShopService {
     return this.http
       .get(`https://${environment.projectId}.firebaseio.com/shop.json`)
       .pipe(
-        filter((r) => r !== null),
         map((res) => {
           return Object.keys(res).map((key) => ({
             ...res[key],

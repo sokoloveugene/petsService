@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { shopItemInterface } from '../../../interfaces';
 @Component({
@@ -9,7 +9,8 @@ import { shopItemInterface } from '../../../interfaces';
 export class ShopProductComponent {
   @Input() item: shopItemInterface;
   @Input() previewMode: boolean;
-
+  @Output() signalToUpdate: EventEmitter<void> = new EventEmitter();
+  
   liked = false;
   amount = 1;
   sum: number;
@@ -63,21 +64,7 @@ export class ShopProductComponent {
           );
       }
 
-      let itemsInCart;
-      if (cart === null) {
-        itemsInCart = this.amount;
-      } else {
-        itemsInCart = Object.values(cart).reduce(
-          (acc, v) => acc + v,
-          this.amount
-        );
-      }
-
-      this.alert.success(
-        `You have ${itemsInCart} ${
-          itemsInCart === 1 ? 'item' : 'items'
-        } in cart`
-      );
+      this.signalToUpdate.emit();
 
       this.item.available = this.item.available - this.amount;
     } catch {

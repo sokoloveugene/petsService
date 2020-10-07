@@ -23,15 +23,6 @@
   font-size: 10px;
 }
 
-.text {
-  margin-bottom: 5px;
-  font-weight: 300;
-}
-
-.highlighted {
-  font-weight: 500;
-}
-
 .confirmed {
   background-color: rgb(71, 201, 151);
 }
@@ -45,6 +36,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .message {
@@ -103,4 +95,25 @@
     border-bottom-right-radius: 10px;
     transform: translate(-30px, -2px);
   }
+}
+
+.docLink {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 46px;
+  width: 46px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background: #9cd2f8;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  fill: #000000;
 }

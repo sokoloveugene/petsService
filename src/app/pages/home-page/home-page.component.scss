@@ -1,6 +1,6 @@
 .workspace {
   border-radius: 20px;
-  width: 100%;
+  max-width: 460px;
   padding: 20px;
   background-color: #eeebeb;
 }
@@ -61,4 +61,21 @@
 
 .date {
   font-size: 12px;
+}
+
+.svgComponent {
+  padding: 20px;
+  flex-grow: 1;
+  height: 70vh;
+}
+
+.homePageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  height: 100%;
+  width: 100%;
 }

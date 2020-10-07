@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/alert.service';
+import { MyValidators } from 'src/app/services/my.validators';
 import { ShopService } from 'src/app/services/shop.service';
+import { SpinerService } from 'src/app/services/spiner.service';
 import { cartItem, shopItemInterface } from 'src/interfaces';
 
 @Component({
@@ -11,13 +16,20 @@ import { cartItem, shopItemInterface } from 'src/interfaces';
 })
 export class CartPageComponent implements OnInit, OnDestroy {
   sub: Subscription;
-  cartItems: any[];
+  cartItems: any[] = [];
   cart: { [key: string]: number }[];
   total: number;
+  form: FormGroup;
 
-  constructor(private shopService: ShopService) {}
+  constructor(
+    private shopService: ShopService,
+    private router: Router,
+    private alert: AlertService,
+    private spiner: SpinerService
+  ) {}
 
   ngOnInit(): void {
+    this.spiner.loadingStart();
     try {
       this.cart = JSON.parse(localStorage.getItem('cart'));
       if (this.cart) {
@@ -35,14 +47,34 @@ export class CartPageComponent implements OnInit, OnDestroy {
                 });
             })
           )
-          .subscribe((data) => {
-            this.cartItems = data;
-            this.updateTotal();
-          });
+          .subscribe(
+            (data) => {
+              if (data) {
+                this.cartItems = data;
+                this.updateTotal();
+              }
+            },
+            null,
+            () => this.spiner.loadingEnd()
+          );
+      } else {
+        this.spiner.loadingEnd();
       }
     } catch {
       console.warn;
     }
+
+    this.form = new FormGroup({
+      name: new FormControl('', Validators.required),
+      delivery: new FormControl('', Validators.required),
+      payment: new FormControl('', Validators.required),
+      address: new FormControl(''),
+      phone: new FormControl('+380', [
+        Validators.required,
+        MyValidators.uaPhone,
+      ]),
+      comments: new FormControl(''),
+    });
   }
 
   ngOnDestroy(): void {
@@ -118,5 +150,26 @@ export class CartPageComponent implements OnInit, OnDestroy {
     } catch {
       localStorage.removeItem('cart');
     }
+  }
+
+  submit() {
+    if (this.form.invalid) return;
+    if (
+      this.form.controls.delivery.value === 'courier' &&
+      this.form.controls.address.value === ''
+    )
+      return;
+
+    const order = {
+      ...this.form.value,
+      cart: this.getCart(),
+      timeStamp: Date.now(),
+    };
+
+    this.setCart(null);
+    this.router.navigate(['/']);
+    this.alert.success('You order was sent');
+
+    console.log(order);
   }
 }

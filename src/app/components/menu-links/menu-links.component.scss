@@ -1,0 +1,24 @@
+.menuContent {
+  list-style: none;
+}
+
+.listItem {
+  margin: 20px 0;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.menuItem {
+  font-size: 24px;
+  font-weight: 300;
+  margin-left: 20px;
+  user-select: none;
+}
+
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+}

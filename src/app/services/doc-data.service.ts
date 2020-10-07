@@ -43,9 +43,11 @@ export class DocDataService {
 
   getProfileData() {
     const docId = this.auth.userId();
-    return this.http.get(
-      `https://${environment.projectId}.firebaseio.com/doctors/${docId}/profile.json`
-    );
+    return this.http
+      .get(
+        `https://${environment.projectId}.firebaseio.com/doctors/${docId}/profile.json`
+      )
+      .pipe(filter((r) => r !== null));
   }
 
   getAppointments() {
@@ -71,5 +73,13 @@ export class DocDataService {
           ]) as Array<string[]>;
         })
       );
+  }
+
+  getDocDataById(id: string) {
+    return this.http
+      .get(
+        `https://${environment.projectId}.firebaseio.com/doctors/${id}/profile.json`
+      )
+      .pipe(filter((r) => r !== null));
   }
 }

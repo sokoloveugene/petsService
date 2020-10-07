@@ -1,21 +1,37 @@
-<app-back-home></app-back-home>
 
-<p>USER PAGE REQUESTS</p>
+<div class="mainContainer">
+  <app-no-user-requests-placeholder
+    *ngIf="userRequests.length === 0"
+  ></app-no-user-requests-placeholder>
+  <app-back-home *ngIf="userRequests.length !== 0"></app-back-home>
+  <div *ngIf="userRequests.length !== 0">
+    <div class="container" *ngFor="let request of userRequests">
+      <app-user-request
+        (showInfoModal)="showModal($event)"
+        [request]="request"
+      ></app-user-request>
 
-<div class="container" *ngFor="let request of userRequests">
-  <app-user-request [request]="request"></app-user-request>
+      <button
+        class="cancelBtn"
+        (click)="
+          deleteRequest(
+            request.confirmed,
+            request.desiredTimeForConsultation,
+            request.requestId,
+            request.docId
+          )
+        "
+      >
+        Cancel
+      </button>
+    </div>
 
-  <button
-    class="cancelBtn"
-    (click)="
-      deleteRequest(
-        request.confirmed,
-        request.desiredTimeForConsultation,
-        request.requestId,
-        request.docId
-      )
-    "
-  >
-    Cancel
-  </button>
+    <app-modal-doctor-data
+      *ngIf="modalVisibility"
+      (onClose)="closeModal()"
+      [id]="docModalId"
+    ></app-modal-doctor-data>
+  </div>
 </div>
+
+

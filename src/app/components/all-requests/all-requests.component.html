@@ -1,5 +1,9 @@
-<div>
-  <h2 class="sectionTitle">Take new order</h2>
+<div class="mainContainer">
+  <h2 *ngIf="allRequests.length !== 0" class="sectionTitle">Take new order</h2>
+
+  <app-no-requests-placeholder
+    *ngIf="allRequests.length === 0"
+  ></app-no-requests-placeholder>
 
   <form
     [formGroup]="form"

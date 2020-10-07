@@ -9,6 +9,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { switchMap } from 'rxjs/operators';
 import { zip, throwError } from 'rxjs';
 import { AppointmentUpdateService } from '../../services/appointment-update.service';
+import { SpinerService } from 'src/app/services/spiner.service';
 
 @Component({
   selector: 'app-all-requests',
@@ -19,32 +20,36 @@ export class AllRequestsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   sub: Subscription;
 
-  allRequests: Array<consultationRequestInterface>;
+  allRequests: Array<consultationRequestInterface> = [];
 
   constructor(
     private consultationService: ConsultationService,
     private auth: AuthService,
     private docData: DocDataService,
     private alert: AlertService,
-    private appointmentUpdate: AppointmentUpdateService
+    private appointmentUpdate: AppointmentUpdateService,
+    private spiner: SpinerService,
   ) {}
 
   ngOnInit(): void {
+    this.spiner.loadingStart()
     this.form = new FormGroup({
       docAnswer: new FormControl(''),
     });
 
     const next = (r) => {
-      this.allRequests = r.sort(
-        (a, b) => a.desiredTimeForConsultation - b.desiredTimeForConsultation
-      );
+      if (r) {
+        this.allRequests = r.sort(
+          (a, b) => a.desiredTimeForConsultation - b.desiredTimeForConsultation
+        );
+      }
     };
 
     const error = () => console.warn;
 
     this.sub = this.consultationService
       .getAllUnconfirmedConsultationRequests()
-      .subscribe(next, error);
+      .subscribe(next, error, () => this.spiner.loadingEnd());
   }
 
   ngOnDestroy() {

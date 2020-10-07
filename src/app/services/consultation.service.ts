@@ -36,7 +36,6 @@ export class ConsultationService {
         `https://${environment.projectId}.firebaseio.com/consultationRequests.json`
       )
       .pipe(
-        filter((r) => r !== null),
         map((res) => {
           return Object.keys(res)
             .map((key) => ({

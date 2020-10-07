@@ -1,11 +1,98 @@
-<p>cart-page works!</p>
+<div class="cartContainer mainContainer">
+  <button *ngIf="cartItems.length !== 0" class="closeBtn" [routerLink]="['/shop']">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 512.001 512.001"
+    >
+      <path
+        d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+              L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+              c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+              l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+              L284.286,256.002z"
+      />
+    </svg>
+  </button>
 
-<app-cart-item
-  (add)="addMore($event)"
-  (remove)="addLess($event)"
-  (delete)="deleteFromCart($event)"
-  *ngFor="let item of cartItems"
-  [item]="item"
-></app-cart-item>
+  <app-cart-empty-placeholder
+    *ngIf="cartItems.length === 0"
+  ></app-cart-empty-placeholder>
 
-<h1>{{ total }}</h1>
+  <div *ngIf="cartItems.length !== 0">
+    <app-cart-item
+      (add)="addMore($event)"
+      (remove)="addLess($event)"
+      *ngFor="let item of cartItems"
+      [item]="item"
+    ></app-cart-item>
+  </div>
+
+  <form *ngIf="cartItems.length !== 0" [formGroup]="form" (submit)="submit()">
+    <label>
+      <span class="primaryLabel">Name</span>
+      <input formControlName="name" class="primaryInput" type="text" />
+    </label>
+
+    <label>
+      <span class="primaryLabel">Phone</span>
+      <input formControlName="phone" class="primaryInput" type="tel" />
+    </label>
+
+    <div class="radioGroup">
+      <label class="radioItem">
+        <input
+          formControlName="delivery"
+          type="radio"
+          name="delivery"
+          value="self"
+        />
+        <span class="radioName">Self pick up</span>
+      </label>
+      <label class="radioItem">
+        <input
+          formControlName="delivery"
+          type="radio"
+          name="delivery"
+          value="courier"
+        />
+        <span class="radioName">Courier</span>
+      </label>
+    </div>
+
+    <label #address *ngIf="form.controls.delivery.value === 'courier'">
+      <span class="primaryLabel">Address</span>
+      <input formControlName="address" class="primaryInput" type="text" />
+    </label>
+
+    <label>
+      <span class="primaryLabel">Comments</span>
+      <input formControlName="comments" class="primaryInput" type="text" />
+    </label>
+
+    <div class="radioGroup">
+      <label class="radioItem">
+        <input
+          formControlName="payment"
+          type="radio"
+          name="payment"
+          value="cash"
+        />
+        <span class="radioName">Cash</span>
+      </label>
+      <label class="radioItem">
+        <input
+          formControlName="payment"
+          type="radio"
+          name="payment"
+          value="card"
+        />
+        <span class="radioName">Credit card</span>
+      </label>
+    </div>
+
+    <p class="total">Total: $ {{ total }}</p>
+
+    <button class="submitBtn">Confirm order</button>
+  </form>
+</div>

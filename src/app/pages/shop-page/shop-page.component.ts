@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ShopService } from 'src/app/services/shop.service';
+import { SpinerService } from 'src/app/services/spiner.service';
 import { shopItemInterface, animalTypes, categoryTypes } from 'src/interfaces';
-
+import { FreezeScrollService } from '../../services/freeze-scroll.service';
 @Component({
   selector: 'app-shop-page',
   templateUrl: './shop-page.component.html',
@@ -17,17 +18,22 @@ export class ShopPageComponent implements OnInit, OnDestroy {
   search = '';
   animalFilters: Array<animalTypes> = [];
   categoryFilters: Array<categoryTypes> = [];
+  amountInCart: number;
 
-  constructor(private shopService: ShopService) {}
+  constructor(
+    private shopService: ShopService,
+    private spiner: SpinerService
+  ) {}
 
   ngOnInit(): void {
+    this.updateCartAmount();
+    this.spiner.loadingStart();
     this.sub = this.shopService
       .getAllItems()
       .pipe(
         map((products: shopItemInterface[]) => {
           try {
             const cart = JSON.parse(localStorage.getItem('cart'));
-            console.log(cart);
             if (cart) {
               return products.map((product) => {
                 if (cart.hasOwnProperty(product.itemId)) {
@@ -47,7 +53,15 @@ export class ShopPageComponent implements OnInit, OnDestroy {
           return products;
         })
       )
-      .subscribe((data) => (this.items = data));
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.items = data;
+          }
+        },
+        null,
+        () => this.spiner.loadingEnd()
+      );
   }
 
   ngOnDestroy(): void {
@@ -79,5 +93,15 @@ export class ShopPageComponent implements OnInit, OnDestroy {
       this.categoryFilters = [];
     }
     this.filtersVisible = !this.filtersVisible;
+  }
+
+  updateCartAmount() {
+    const cart: { [key: string]: number } = JSON.parse(
+      localStorage.getItem('cart')
+    );
+
+    if (cart) {
+      this.amountInCart = Object.values(cart).reduce((acc, v) => acc + v, 0);
+    }
   }
 }

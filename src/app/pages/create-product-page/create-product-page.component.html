@@ -1,40 +1,42 @@
-<app-back-home></app-back-home>
+<div class="mainContainer">
+  <app-back-home></app-back-home>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
-  <p class="primaryLabel">Photo url</p>
-  <input class="primaryInput" formControlName="url" type="text" />
-  <p class="primaryLabel">Name product</p>
-  <input class="primaryInput" formControlName="name" type="text" />
-  <p class="primaryLabel">Details</p>
-  <input class="primaryInput" formControlName="details" type="text" />
-  <p class="primaryLabel">Price</p>
-  <input class="primaryInput" formControlName="price" type="number" />
-  <p class="primaryLabel">Available</p>
-  <input class="primaryInput" formControlName="available" type="number" />
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <p class="primaryLabel">Photo url</p>
+    <input class="primaryInput" formControlName="url" type="text" />
+    <p class="primaryLabel">Name product</p>
+    <input class="primaryInput" formControlName="name" type="text" />
+    <p class="primaryLabel">Details</p>
+    <input class="primaryInput" formControlName="details" type="text" />
+    <p class="primaryLabel">Price</p>
+    <input class="primaryInput" formControlName="price" type="number" />
+    <p class="primaryLabel">Available</p>
+    <input class="primaryInput" formControlName="available" type="number" />
 
-  <select class="primarySelect" formControlName="animal">
-    <option disabled value="">Animal</option>
-    <option value="cats">Cat</option>
-    <option value="dogs">Dog</option>
-    <option value="fishes">Fish</option>
-    <option value="rodents">Rodents</option>
-    <option value="others">Other</option>
-  </select>
+    <select class="primarySelect" formControlName="animal">
+      <option disabled value="">Animal</option>
+      <option value="cats">Cat</option>
+      <option value="dogs">Dog</option>
+      <option value="fishes">Fish</option>
+      <option value="rodents">Rodents</option>
+      <option value="others">Other</option>
+    </select>
 
-  <select class="primarySelect" formControlName="category">
-    <option disabled value="">Category</option>
-    <option value="food">Food</option>
-    <option value="medicines">Drugs</option>
-    <option value="toys">Toys</option>
-    <option value="accessories">Accessories</option>
-    <option value="charity">Charity</option>
-  </select>
+    <select class="primarySelect" formControlName="category">
+      <option disabled value="">Category</option>
+      <option value="food">Food</option>
+      <option value="medicines">Drugs</option>
+      <option value="toys">Toys</option>
+      <option value="accessories">Accessories</option>
+      <option value="charity">Charity</option>
+    </select>
 
-  <app-shop-product
-    [previewMode]="true"
-    *ngIf="form.valid"
-    [item]="this.form.value"
-  ></app-shop-product>
+    <app-shop-product
+      [previewMode]="true"
+      *ngIf="form.valid"
+      [item]="this.form.value"
+    ></app-shop-product>
 
-  <button class="fullSizeBtn blueBtn" type="submit">Save</button>
-</form>
+    <button class="fullSizeBtn blueBtn" type="submit">Save</button>
+  </form>
+</div>

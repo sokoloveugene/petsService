@@ -1,0 +1,37 @@
+<ul class="menuContent" [class.inline]="inline">
+  <li
+    class="listItem"
+    *ngIf="auth.isAuth() && auth.isDoctor()"
+    [routerLink]="['/all_requests']"
+  >
+    <span class="menuItem">Account</span>
+  </li>
+
+  <li
+    class="listItem"
+    *ngIf="auth.isAuth() && auth.isAdmin()"
+    [routerLink]="['/create_product']"
+  >
+    <span class="menuItem">Create product</span>
+  </li>
+
+  <li
+    class="listItem"
+    *ngIf="auth.isAuth() && !this.auth.isDoctor() && !this.auth.isAdmin()"
+    [routerLink]="['/user_requests']"
+  >
+    <span class="menuItem">Your requests</span>
+  </li>
+
+  <li class="listItem" [routerLink]="['/shop']">
+    <span class="menuItem">Shop</span>
+  </li>
+
+  <li *ngIf="!auth.isAdmin()" class="listItem" [routerLink]="['/cart']">
+    <span class="menuItem">Cart</span>
+  </li>
+
+  <li class="listItem" [routerLink]="['/about']">
+    <span class="menuItem">About</span>
+  </li>
+</ul>

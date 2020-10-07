@@ -1,17 +1,23 @@
 import { HttpClient } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnDestroy, OnInit, ɵConsole } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { async } from 'rxjs/internal/scheduler/async';
 import { DocDataService } from 'src/app/services/doc-data.service';
 import { MyValidators } from 'src/app/services/my.validators';
 import { environment } from '../../../environments/environment';
+import { profileDataInterface } from '../../../interfaces';
 
 @Component({
   selector: 'app-profile-settings-page',
   templateUrl: './profile-settings-page.component.html',
   styleUrls: ['./profile-settings-page.component.scss'],
 })
-export class ProfileSettingsPageComponent implements OnInit {
+export class ProfileSettingsPageComponent implements OnInit, OnDestroy {
+  sub: Subscription;
+
   defaultProfilePhoto = environment.defaultProfilePhotoUrl;
 
   photoToShow = this.defaultProfilePhoto;
@@ -25,6 +31,15 @@ export class ProfileSettingsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sub = this.docData
+      .getProfileData()
+      .subscribe((data: profileDataInterface) => {
+        if (data) {
+          this.form.patchValue(data);
+          this.loadPhotoUrlFromInstagram();
+        }
+      });
+
     this.form = new FormGroup({
       insta: new FormControl(''),
       name: new FormControl('', Validators.required),
@@ -44,11 +59,21 @@ export class ProfileSettingsPageComponent implements OnInit {
     });
   }
 
-  loadPhotoUrlFromInstagram(e) {
-    const userName = e.target.value;
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+      this.sub = null;
+    }
+  }
+
+  loadPhotoUrlFromInstagram(extendNext?) {
+    const userName = this.form.controls['insta']['value'];
     if (userName.trim()) {
       const next = (r) => {
         this.photoToShow = r['graphql']['user']['profile_pic_url'];
+        if (extendNext) {
+          extendNext();
+        }
       };
 
       const error = (err) => {
@@ -70,13 +95,17 @@ export class ProfileSettingsPageComponent implements OnInit {
     const expirence =
       new Date().getFullYear() - Number(this.form.controls.startCareer.value);
 
-    const body = {
-      ...this.form.value,
-      photoUrl: this.photoToShow,
-      expirence,
+    const extention = () => {
+      const body = {
+        ...this.form.value,
+        photoUrl: this.photoToShow,
+        expirence,
+      };
+
+      this.docData.writeProfileData(body).subscribe();
+      this.router.navigate(['/']);
     };
 
-    this.docData.writeProfileData(body).subscribe();
-    this.router.navigate(['/']);
+    this.loadPhotoUrlFromInstagram(extention);
   }
 }
