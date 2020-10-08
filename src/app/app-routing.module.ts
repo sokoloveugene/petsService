@@ -17,12 +17,18 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   {
     path: 'login',
-    component: LoginPageComponent,
+    loadChildren: () =>
+      import('./pages/login-page/login-page.module').then(
+        (m) => m.LoginPageModule
+      ),
     canActivate: [AuthInversionGuard],
   },
   {
     path: 'sign_up',
-    component: SignUpPageComponent,
+    loadChildren: () =>
+      import('./pages/sign-up-page/sign-up-page.module').then(
+        (m) => m.SignUpPageModule
+      ),
     canActivate: [AuthInversionGuard],
   },
   {
@@ -40,9 +46,21 @@ const routes: Routes = [
     component: ProfileSettingsPageComponent,
     canActivate: [AuthGuard, DocGuard],
   },
-  { path: 'shop', component: ShopPageComponent },
+  {
+    path: 'shop',
+    loadChildren: () =>
+      import('./pages/shop-page/shop-page.module').then(
+        (m) => m.ShopPageModule
+      ),
+  },
   { path: 'create_product', component: CreateProductPageComponent },
-  { path: 'cart', component: CartPageComponent },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('./pages/cart-page/cart-page.module').then(
+        (m) => m.CartPageModule
+      ),
+  },
 ];
 
 @NgModule({
