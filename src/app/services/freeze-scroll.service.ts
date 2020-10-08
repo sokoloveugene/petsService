@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { DocDataService } from '../services/doc-data.service';
 
 @Injectable({
   providedIn: 'root',

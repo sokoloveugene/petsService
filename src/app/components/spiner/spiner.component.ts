@@ -1,21 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {SpinerService} from "../../services/spiner.service";
+import { SpinerService } from '../../services/spiner.service';
 
 @Component({
   selector: 'app-spiner',
   templateUrl: './spiner.component.html',
-  styleUrls: ['./spiner.component.scss']
+  styleUrls: ['./spiner.component.scss'],
 })
 export class SpinerComponent implements OnInit, OnDestroy {
   sub: Subscription;
   visibility: boolean;
 
-  constructor(private spiner: SpinerService ) { }
-
+  constructor(private spiner: SpinerService) {}
 
   ngOnInit(): void {
-    this.sub = this.spiner.loading$.subscribe(state => this.visibility = state)
+    this.sub = this.spiner.loading$.subscribe(
+      (state) => (this.visibility = state)
+    );
   }
 
   ngOnDestroy(): void {
@@ -24,5 +25,4 @@ export class SpinerComponent implements OnInit, OnDestroy {
       this.sub = null;
     }
   }
-
 }

@@ -1,7 +1,7 @@
 <div class="menu">
   <div class="menuHeader">
     <svg
-    *ngIf="mobileDevice"
+      *ngIf="mobileDevice"
       (click)="toggle()"
       class="menuSvg"
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,11 @@
     <app-menu-links [inline]="true" *ngIf="!mobileDevice"></app-menu-links>
 
     <div class="authContainer">
-      <button class="btn whiteBtn" *ngIf="!auth.isAuth()" [routerLink]="['/sign_up']">
+      <button
+        class="btn whiteBtn"
+        *ngIf="!auth.isAuth()"
+        [routerLink]="['/sign_up']"
+      >
         Join now
       </button>
 

@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { fromEvent, Subscription, SubscriptionLike } from 'rxjs';
+import { fromEvent, SubscriptionLike } from 'rxjs';
 import { ConsultationService } from '../../services/consultation.service';
 import { consultationRequestInterface } from '../../../interfaces';
 import { filter, tap } from 'rxjs/operators';

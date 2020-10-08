@@ -28,11 +28,11 @@ export class AllRequestsComponent implements OnInit, OnDestroy {
     private docData: DocDataService,
     private alert: AlertService,
     private appointmentUpdate: AppointmentUpdateService,
-    private spiner: SpinerService,
+    private spiner: SpinerService
   ) {}
 
   ngOnInit(): void {
-    this.spiner.loadingStart()
+    this.spiner.loadingStart();
     this.form = new FormGroup({
       docAnswer: new FormControl(''),
     });

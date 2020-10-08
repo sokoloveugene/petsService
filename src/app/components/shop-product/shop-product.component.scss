@@ -8,6 +8,7 @@
   margin: 30px auto;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .imgContainer {
@@ -111,5 +112,11 @@
 
   &:hover {
     margin: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    min-width: 350px;
   }
 }

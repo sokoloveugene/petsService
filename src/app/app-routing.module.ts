@@ -1,17 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
-import { UserRequestsPageComponent } from './pages/user-requests-page/user-requests-page.component';
 import { AuthGuard } from './routeGuards/auth.guard';
 import { AuthInversionGuard } from './routeGuards/auth-inversion.guard';
-import { DoctorsAccountPageComponent } from './pages/doctors-account-page/doctors-account-page.component';
 import { DocGuard } from './routeGuards/doc.guard';
-import { ProfileSettingsPageComponent } from './pages/profile-settings-page/profile-settings-page.component';
-import { ShopPageComponent } from './pages/shop-page/shop-page.component';
-import { CreateProductPageComponent } from './pages/create-product-page/create-product-page.component';
-import { CartPageComponent } from './pages/cart-page/cart-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -33,17 +25,26 @@ const routes: Routes = [
   },
   {
     path: 'user_requests',
-    component: UserRequestsPageComponent,
+    loadChildren: () =>
+      import('./pages/user-requests-page/user-requests-page.module').then(
+        (m) => m.UserRequestsPageModule
+      ),
     canActivate: [AuthGuard],
   },
   {
     path: 'all_requests',
-    component: DoctorsAccountPageComponent,
+    loadChildren: () =>
+      import('./pages/doctors-account-page/doctors-account-page.module').then(
+        (m) => m.DoctorsAccountPageModule
+      ),
     canActivate: [AuthGuard, DocGuard],
   },
   {
     path: 'profile_settings',
-    component: ProfileSettingsPageComponent,
+    loadChildren: () =>
+      import('./pages/profile-settings-page/profile-settings-page.module').then(
+        (m) => m.ProfileSettingsPageModule
+      ),
     canActivate: [AuthGuard, DocGuard],
   },
   {
@@ -53,7 +54,13 @@ const routes: Routes = [
         (m) => m.ShopPageModule
       ),
   },
-  { path: 'create_product', component: CreateProductPageComponent },
+  {
+    path: 'create_product',
+    loadChildren: () =>
+      import('./pages/create-product-page/create-product-page.module').then(
+        (m) => m.CreateProductPageModule
+      ),
+  },
   {
     path: 'cart',
     loadChildren: () =>
@@ -64,7 +71,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

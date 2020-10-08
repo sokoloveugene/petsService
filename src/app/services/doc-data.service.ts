@@ -62,8 +62,6 @@ export class DocDataService {
         filter((r) => r !== null),
         map((r) => {
           const requestsTimeArr = Object.keys(r);
-          console.log('today', today);
-          console.log(requestsTimeArr);
           const filteredTime = requestsTimeArr.filter(
             (time) => Number(time) > today
           );

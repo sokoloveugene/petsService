@@ -2,11 +2,7 @@
   <div class="banner"></div>
 
   <div class="aside mainContainer">
-    <form
-      class="loginForm "
-      [formGroup]="form"
-      (ngSubmit)="submit()"
-    >
+    <form class="loginForm" [formGroup]="form" (ngSubmit)="submit()">
       <h2 class="header">Sign in to Pets Service App</h2>
       <p class="primaryLabel">Email Address</p>
       <input class="primaryInput" formControlName="email" type="text" />

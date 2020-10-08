@@ -24,7 +24,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.mobileDevice = window.innerWidth < this.windowService.breakpoint;
-    this.sub = this.windowService.windowWiderBreakPoint().subscribe(e => this.mobileDevice = e);
+    this.sub = this.windowService
+      .windowWiderBreakPoint()
+      .subscribe((e) => (this.mobileDevice = e));
   }
 
   ngOnDestroy(): void {

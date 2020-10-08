@@ -92,7 +92,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.auth.isDoctor()) {
+    if (this.auth.isDoctor() | this.auth.isAdmin()) {
       this.alert.error('To make requests plesase login as Customer');
       return;
     }

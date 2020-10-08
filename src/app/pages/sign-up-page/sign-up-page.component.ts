@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
-import { AuthService } from '../../services/auth.service';
 import { SignUpService } from '../../services/sign-up.service';
+
 @Component({
   selector: 'app-sign-up-page',
   templateUrl: './sign-up-page.component.html',
@@ -14,8 +13,6 @@ export class SignUpPageComponent implements OnInit {
 
   constructor(
     private signUp: SignUpService,
-    private router: Router,
-    private auth: AuthService,
     private alertServise: AlertService
   ) {}
 

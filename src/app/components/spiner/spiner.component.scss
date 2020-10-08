@@ -1,6 +1,6 @@
 .spinerContainer {
-    background-color: #fff;
-    z-index: 1000;
+  background-color: #fff;
+  z-index: 1000;
 }
 
 .loader,
@@ -24,7 +24,7 @@
 }
 .loader:before,
 .loader:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
 }

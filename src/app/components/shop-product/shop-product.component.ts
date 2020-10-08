@@ -10,7 +10,7 @@ export class ShopProductComponent {
   @Input() item: shopItemInterface;
   @Input() previewMode: boolean;
   @Output() signalToUpdate: EventEmitter<void> = new EventEmitter();
-  
+
   liked = false;
   amount = 1;
   sum: number;

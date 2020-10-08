@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { ShopService } from 'src/app/services/shop.service';
 import { SpinerService } from 'src/app/services/spiner.service';
 import { shopItemInterface, animalTypes, categoryTypes } from 'src/interfaces';
-import { FreezeScrollService } from '../../services/freeze-scroll.service';
+
 @Component({
   selector: 'app-shop-page',
   templateUrl: './shop-page.component.html',

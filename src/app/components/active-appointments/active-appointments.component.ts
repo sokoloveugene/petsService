@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { DocDataService } from '../../services/doc-data.service';
 import { AppointmentUpdateService } from '../../services/appointment-update.service';
 import { SubscriptionLike } from 'rxjs';
@@ -8,7 +14,7 @@ import { SubscriptionLike } from 'rxjs';
   styleUrls: ['./active-appointments.component.scss'],
 })
 export class ActiveAppointmentsComponent implements OnInit, OnDestroy {
-  @Output() showModalById: EventEmitter<string> = new EventEmitter()
+  @Output() showModalById: EventEmitter<string> = new EventEmitter();
 
   subscriptions: SubscriptionLike[] = [];
 

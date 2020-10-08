@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnDestroy, OnInit, ɵConsole } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { async } from 'rxjs/internal/scheduler/async';
 import { DocDataService } from 'src/app/services/doc-data.service';
 import { MyValidators } from 'src/app/services/my.validators';
 import { environment } from '../../../environments/environment';

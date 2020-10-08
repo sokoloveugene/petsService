@@ -4,14 +4,12 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-menu-links',
   templateUrl: './menu-links.component.html',
-  styleUrls: ['./menu-links.component.scss']
+  styleUrls: ['./menu-links.component.scss'],
 })
 export class MenuLinksComponent implements OnInit {
   @Input() inline;
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService) {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
