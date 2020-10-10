@@ -17,26 +17,26 @@
     </button>
 
     <div class="imgContainer">
-      <img class="img" [src]="docData.photoUrl" [alt]="docData.surname" />
+      <img class="img" [src]="docData?.photoUrl" [alt]="docData?.surname" />
     </div>
 
     <p class="text">
-      <span class="highlighted">Dr </span>{{ docData.surname }}
-      {{ docData.name }}
+      <span class="highlighted">Dr </span>{{ docData?.surname }}
+      {{ docData?.name }}
     </p>
 
     <p class="text">
-      <span class="highlighted">Phone: </span>{{ docData.phone }}
+      <span class="highlighted">Phone: </span>{{ docData?.phone }}
     </p>
 
     <p class="text">
       <span class="highlighted">Experience: </span
-      >{{ docData.startCareer | yearsOfExperince }}
-      {{ (docData.startCareer | yearsOfExperince) <= 1 ? "year" : "years" }}
+      >{{ docData?.startCareer | yearsOfExperince }}
+      {{ (docData?.startCareer | yearsOfExperince) <= 1 ? "year" : "years" }}
     </p>
 
     <p class="text">
-      <span class="highlighted">Biography: </span>{{ docData.biography }}
+      <span class="highlighted">Biography: </span>{{ docData?.biography }}
     </p>
   </div>
 </div>

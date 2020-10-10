@@ -11,6 +11,7 @@ import { MenuLinksComponent } from './components/menu-links/menu-links.component
 import { SpinerComponent } from './components/spiner/spiner.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { SharedModule } from './shared.module';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 const INTERCAPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -26,6 +27,7 @@ const INTERCAPTOR_PROVIDER: Provider = {
     MenuComponent,
     MenuLinksComponent,
     SpinerComponent,
+    AboutPageComponent,
   ],
   imports: [
     BrowserModule,

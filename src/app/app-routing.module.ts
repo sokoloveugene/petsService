@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AuthGuard } from './routeGuards/auth.guard';
 import { AuthInversionGuard } from './routeGuards/auth-inversion.guard';
 import { DocGuard } from './routeGuards/doc.guard';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -68,6 +69,7 @@ const routes: Routes = [
         (m) => m.CartPageModule
       ),
   },
+  {path: "about", component: AboutPageComponent}
 ];
 
 @NgModule({
